@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>D&D · Cafetería y Pastelería Artesanal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+
+  /* ============================================================
+     DEMO PARA CLIENTE REAL — D&D Cafetería y Pastelería Artesanal
+     Identidad: pastelería juguetona, colores cálidos y variados,
+     tipografía redondeada. Dos sedes confirmadas.
+     TELÉFONO Y HORARIO: placeholders — reemplazar con datos reales
+     (el usuario ya tiene contacto directo con el negocio).
+     ============================================================ */
+
+  :root {
+    --color-bg: #FBF7F0;
+    --color-bg-alt: #F3E7D8;
+    --color-text: #3A2E28;
+    --color-text-soft: #7A6B5D;
+    --color-accent: #E0A85F;      /* caramelo/mostaza */
+    --color-accent-dark: #B8823C;
+    --color-coral: #E08E79;       /* coral cálido, del panel "Café" del menú */
+    --color-mint: #8FB89C;        /* verde menta, del panel "Helados" */
+    --color-whatsapp: #25D366;
+    --color-border: #E8DCC8;
+
+    --font-display: 'Fredoka', 'Trebuchet MS', sans-serif;
+    --font-body: 'Nunito', -apple-system, sans-serif;
+
+    --radius: 20px;
+    --max-width: 1120px;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+
+  body {
+    margin: 0;
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  img { max-width: 100%; display: block; }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--color-accent-dark); outline-offset: 2px; }
+
+  .wrap { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+
+  h1, h2, h3 { font-family: var(--font-display); font-weight: 600; margin: 0 0 0.4em; }
+  p { margin: 0 0 1em; }
+
+  .eyebrow {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-accent-dark);
+    margin-bottom: 0.6em;
+    display: inline-block;
+  }
+
+  /* ---------- Botones ---------- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 26px;
+    border-radius: 999px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .btn:hover { transform: translateY(-2px) rotate(-0.5deg); }
+
+  .btn-whatsapp { background: var(--color-whatsapp); color: #fff; box-shadow: 0 6px 18px rgba(37,211,102,0.3); }
+  .btn-whatsapp:hover { box-shadow: 0 10px 24px rgba(37,211,102,0.4); }
+
+  .btn-outline { background: transparent; border-color: var(--color-text); color: var(--color-text); }
+  .btn-outline:hover { background: var(--color-text); color: var(--color-bg); }
+
+  .btn svg { width: 20px; height: 20px; flex-shrink: 0; }
+
+  /* ---------- Header ---------- */
+  header {
+    position: sticky;
+    top: 0;
+    background: rgba(251, 247, 240, 0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--color-border);
+    z-index: 50;
+  }
+  .nav { display: flex; align-items: center; justify-content: space-between; padding: 14px 24px; }
+  .logo {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.5rem;
+    text-decoration: none;
+    color: var(--color-text);
+  }
+  .logo span { color: var(--color-coral); }
+  .nav-links { display: flex; gap: 28px; list-style: none; margin: 0; padding: 0; }
+  .nav-links a { text-decoration: none; font-weight: 700; font-size: 0.9rem; color: var(--color-text-soft); }
+  .nav-links a:hover { color: var(--color-accent-dark); }
+  .nav-actions .btn { padding: 10px 20px; font-size: 0.85rem; }
+
+  @media (max-width: 760px) { .nav-links { display: none; } }
+
+  /* ---------- Hero ---------- */
+  .hero { padding: 64px 0 52px; text-align: center; }
+  .hero-inner { max-width: 640px; margin: 0 auto; }
+  .hero h1 { font-size: clamp(2rem, 4.5vw, 3rem); line-height: 1.1; }
+  .hero h1 em { font-style: normal; color: var(--color-coral); }
+  .hero-lead { font-size: 1.15rem; color: var(--color-text-soft); }
+  .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; margin-top: 24px; }
+
+  .sedes-pill {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 22px;
+  }
+  .sedes-pill span {
+    background: var(--color-bg-alt);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--color-text-soft);
+  }
+
+  /* ---------- Carta por pestañas ---------- */
+  .menu { padding: 56px 0; }
+  .menu-head { max-width: 60ch; margin: 0 auto 32px; text-align: center; }
+
+  .menu-tabs { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 34px; }
+  .menu-tab {
+    padding: 10px 20px;
+    border-radius: 999px;
+    border: 2px solid var(--color-border);
+    background: #fff;
+    color: var(--color-text-soft);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.86rem;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  }
+  .menu-tab:hover { border-color: var(--color-coral); color: var(--color-accent-dark); }
+  .menu-tab.active { background: var(--color-coral); border-color: var(--color-coral); color: #fff; }
+
+  .menu-panel { display: none; }
+  .menu-panel.active { display: block; animation: fadeIn 0.2s ease; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+  .menu-groups { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .menu-group {
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 26px;
+  }
+  .menu-group.full { grid-column: 1 / -1; }
+  .menu-group h3 {
+    font-size: 1.05rem;
+    color: var(--color-accent-dark);
+    border-bottom: 2px dashed var(--color-border);
+    padding-bottom: 10px;
+    margin-bottom: 14px;
+  }
+  .menu-item { display: flex; justify-content: space-between; gap: 12px; padding: 6px 0; font-size: 0.94rem; }
+  .menu-item .name { color: var(--color-text); font-weight: 600; }
+  .menu-item .desc { display: block; font-size: 0.78rem; color: var(--color-text-soft); font-weight: 400; }
+  .menu-item .price { color: var(--color-coral); white-space: nowrap; font-weight: 800; }
+
+  @media (max-width: 760px) { .menu-groups { grid-template-columns: 1fr; } }
+
+  /* ---------- Sedes / contacto ---------- */
+  .contact { padding: 56px 0 80px; background: var(--color-bg-alt); }
+  .contact-head { text-align: center; max-width: 60ch; margin: 0 auto 36px; }
+
+  .sedes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .sede-card {
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 30px;
+  }
+  .sede-card h3 { font-size: 1.15rem; color: var(--color-text); margin-bottom: 4px; }
+  .sede-card .tag {
+    display: inline-block;
+    background: var(--color-mint);
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 999px;
+    margin-bottom: 14px;
+  }
+  .contact-line { display: flex; gap: 10px; margin-bottom: 12px; font-size: 0.92rem; color: var(--color-text-soft); }
+  .contact-line svg { width: 18px; height: 18px; flex-shrink: 0; color: var(--color-coral); margin-top: 2px; }
+
+  @media (max-width: 760px) { .sedes-grid { grid-template-columns: 1fr; } }
+
+  /* ---------- Footer ---------- */
+  footer {
+    padding: 24px 0;
+    font-size: 0.85rem;
+    color: var(--color-text-soft);
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+  }
+
+  /* ---------- Botón flotante ---------- */
+  .float-whatsapp {
+    position: fixed; bottom: 20px; right: 20px;
+    width: 58px; height: 58px; border-radius: 50%;
+    background: var(--color-whatsapp);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    z-index: 60; text-decoration: none;
+  }
+  .float-whatsapp svg { width: 28px; height: 28px; color: #fff; }
+
+</style>
+</head>
+<body>
+
+  <header>
+    <nav class="nav wrap">
+      <a href="#" class="logo">D<span>&</span>D</a>
+      <ul class="nav-links">
+        <li><a href="#carta">Carta</a></li>
+        <li><a href="#sedes">Nuestras sedes</a></li>
+      </ul>
+      <div class="nav-actions">
+        <!-- PERSONALIZAR: número real de WhatsApp del negocio -->
+        <a class="btn btn-whatsapp" href="https://wa.me/51920154926?text=Hola%2C%20quisiera%20más%20información" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5C10 9 9.4 7.6 9.1 7c-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.2.3-1 1-1 2.4s1 2.8 1.1 3c.1.2 2 3 4.8 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.2-.3-.2-.6-.3z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.6 1.4 5.1L2 22l5.1-1.3c1.4.8 3.1 1.2 4.9 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.6 0-3.2-.4-4.5-1.3l-.3-.2-3.3.9.9-3.2-.2-.3C3.7 14.7 3.3 13.4 3.3 12 3.3 7.2 7.2 3.3 12 3.3S20.7 7.2 20.7 12 16.8 20.2 12 20.2z"/></svg>
+          WhatsApp
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ================= HERO ================= -->
+    <section class="hero">
+      <div class="wrap hero-inner">
+        <span class="eyebrow">Cafetería y pastelería artesanal</span>
+        <h1>La vida es corta, <em>come el postre primero.</em></h1>
+        <p class="hero-lead">Café de especialidad, helados artesanales y postres hechos como en casa — con dos sedes para encontrarte más cerca.</p>
+
+        <div class="hero-actions">
+          <a class="btn btn-whatsapp" href="https://wa.me/51920154926?text=Hola%2C%20quisiera%20más%20información" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5C10 9 9.4 7.6 9.1 7c-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.2.3-1 1-1 2.4s1 2.8 1.1 3c.1.2 2 3 4.8 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.2-.3-.2-.6-.3z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.6 1.4 5.1L2 22l5.1-1.3c1.4.8 3.1 1.2 4.9 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.6 0-3.2-.4-4.5-1.3l-.3-.2-3.3.9.9-3.2-.2-.3C3.7 14.7 3.3 13.4 3.3 12 3.3 7.2 7.2 3.3 12 3.3S20.7 7.2 20.7 12 16.8 20.2 12 20.2z"/></svg>
+            Escríbenos
+          </a>
+          <a class="btn btn-outline" href="#carta">Ver la carta</a>
+        </div>
+
+        <div class="sedes-pill">
+          <span>📍 Av. Velasco Astete 2686</span>
+          <span>📍 Av. Javier Prado Oeste 808</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CARTA ================= -->
+    <section class="menu" id="carta">
+      <div class="wrap">
+        <div class="menu-head">
+          <span class="eyebrow">Nuestra carta</span>
+          <h2>Todo lo que preparamos en D&D</h2>
+        </div>
+
+        <div class="menu-tabs" role="tablist">
+          <button class="menu-tab active" data-tab="caliente">Espresso Bar</button>
+          <button class="menu-tab" data-tab="frio">Espresso Bar Frío</button>
+          <button class="menu-tab" data-tab="tes">Té de la Fidelia</button>
+          <button class="menu-tab" data-tab="cafeteria">Café, Frappé & Milkshakes</button>
+          <button class="menu-tab" data-tab="helados">Helados & Cookies</button>
+          <button class="menu-tab" data-tab="bebidas">Jugos, Limonadas & Otros</button>
+        </div>
+
+        <!-- ESPRESSO BAR CALIENTE -->
+        <div class="menu-panel active" id="panel-caliente">
+          <div class="menu-groups">
+            <div class="menu-group">
+              <h3>Clásicos</h3>
+              <div class="menu-item"><span class="name">Espresso</span><span class="price">S/ 7.00</span></div>
+              <div class="menu-item"><span class="name">Espresso Doble</span><span class="price">S/ 8.50</span></div>
+              <div class="menu-item"><span class="name">Americano</span><span class="price">S/ 7.00 – 8.50</span></div>
+              <div class="menu-item"><span class="name">Long Black</span><span class="price">S/ 8.50</span></div>
+              <div class="menu-item"><span class="name">Flat White</span><span class="price">S/ 10.00</span></div>
+              <div class="menu-item"><span class="name">Chocolate Caliente</span><span class="price">S/ 10.00</span></div>
+            </div>
+            <div class="menu-group">
+              <h3>Con leche</h3>
+              <div class="menu-item"><span class="name">Capuccino</span><span class="price">S/ 8.00 – 12.00</span></div>
+              <div class="menu-item"><span class="name">Capuccino Caramel</span><span class="price">S/ 9.00 – 13.00</span></div>
+              <div class="menu-item"><span class="name">Latte</span><span class="price">S/ 10.00</span></div>
+              <div class="menu-item"><span class="name">Latte Vainilla o Caramel</span><span class="price">S/ 12.00</span></div>
+              <div class="menu-item"><span class="name">Moccaccino D&D</span><span class="price">S/ 12.00</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ESPRESSO BAR FRÍO -->
+        <div class="menu-panel" id="panel-frio">
+          <div class="menu-groups">
+            <div class="menu-group">
+              <h3>Fríos clásicos</h3>
+              <div class="menu-item"><span class="name">Ice Americano</span><span class="price">S/ 10.00</span></div>
+              <div class="menu-item"><span class="name">Ice Long Black</span><span class="price">S/ 12.00</span></div>
+              <div class="menu-item"><span class="name">Ice Latte</span><span class="price">S/ 12.00</span></div>
+              <div class="menu-item"><span class="name">Ice Latte Vainilla o Caramel</span><span class="price">S/ 14.00</span></div>
+              <div class="menu-item"><span class="name">Ice Moccaccino D&D</span><span class="price">S/ 14.00</span></div>
+              <div class="menu-item"><span class="name">Affogato</span><span class="price">S/ 12.50</span></div>
+            </div>
+            <div class="menu-group">
+              <h3>Tonic Espresso</h3>
+              <div class="menu-item"><span class="name">Honey Tonic Espresso<span class="desc">Con miel</span></span><span class="price">S/ 14.00</span></div>
+              <div class="menu-item"><span class="name">Blueberry Tonic Espresso</span><span class="price">S/ 14.00</span></div>
+              <div class="menu-item"><span class="name">Mango Tonic Espresso</span><span class="price">S/ 14.00</span></div>
+              <div class="menu-item"><span class="name">Maracuyá Tonic Espresso</span><span class="price">S/ 14.00</span></div>
+              <div class="menu-item"><span class="name">Orange Lemon Tonic Espresso</span><span class="price">S/ 14.00</span></div>
+              <div class="menu-item"><span class="name">Orange Espresso</span><span class="price">S/ 14.00</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TÉ DE LA FIDELIA -->
+        <div class="menu-panel" id="panel-tes">
+          <div class="menu-groups">
+            <div class="menu-group full">
+              <h3>Té de la Fidelia — hot / ice</h3>
+              <div class="menu-item"><span class="name">Frutos Rojos<span class="desc">Uvas, kion, sauco, fresas y anís estrella</span></span><span class="price">S/ 8.50 / 14.00</span></div>
+              <div class="menu-item"><span class="name">Eterno Deseo<span class="desc">Té negro, trozos de fresa, sauco, hibisco y flores</span></span><span class="price">S/ 8.50 / 14.00</span></div>
+              <div class="menu-item"><span class="name">Bendito Emoliente<span class="desc">Cebada, cola de caballo, linaza, chía y boldo</span></span><span class="price">S/ 8.50 / 14.00</span></div>
+              <div class="menu-item"><span class="name">Armonía del Cielo<span class="desc">Manzanilla, pimpinela, milenrama, cáscara de limón</span></span><span class="price">S/ 8.50</span></div>
+              <div class="menu-item"><span class="name">Hierbaluisa Radiante<span class="desc">Hierba luisa, cáscara de naranja y botón de oro</span></span><span class="price">S/ 8.50</span></div>
+              <div class="menu-item"><span class="name">Caricia Silvestre<span class="desc">Hojas de anís, cedrón, yacón, piña y botón de oro</span></span><span class="price">S/ 8.50</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CAFÉ, FRAPPÉ & MILKSHAKES -->
+        <div class="menu-panel" id="panel-cafeteria">
+          <div class="menu-groups">
+            <div class="menu-group">
+              <h3>Café</h3>
+              <div class="menu-item"><span class="name">Americano</span><span class="price">S/ 5.50</span></div>
+              <div class="menu-item"><span class="name">Latte / Capuccino</span><span class="price">S/ 8.00</span></div>
+              <div class="menu-item"><span class="name">Caramel Capuccino</span><span class="price">S/ 8.00</span></div>
+              <div class="menu-item"><span class="name">Chocolate Caliente</span><span class="price">S/ 8.00</span></div>
+            </div>
+            <div class="menu-group">
+              <h3>Frappé</h3>
+              <div class="menu-item"><span class="name">Café</span><span class="price">S/ 12.00</span></div>
+              <div class="menu-item"><span class="name">Caramelo</span><span class="price">S/ 12.00</span></div>
+              <div class="menu-item"><span class="name">Chocolate</span><span class="price">S/ 12.00</span></div>
+            </div>
+            <div class="menu-group full">
+              <h3>MilkShakes</h3>
+              <div class="menu-item"><span class="name">Fresa</span><span class="price">S/ 14.00</span></div>
+              <div class="menu-item"><span class="name">Chocolate</span><span class="price">S/ 14.00</span></div>
+              <div class="menu-item"><span class="name">Nutella</span><span class="price">S/ 14.00</span></div>
+              <div class="menu-item"><span class="name">Oreo</span><span class="price">S/ 14.00</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- HELADOS & COOKIES -->
+        <div class="menu-panel" id="panel-helados">
+          <div class="menu-groups">
+            <div class="menu-group">
+              <h3>Helados Artesanales</h3>
+              <div class="menu-item"><span class="name">1 Bola</span><span class="price">S/ 7.00</span></div>
+              <div class="menu-item"><span class="name">2 Bolas</span><span class="price">S/ 12.00</span></div>
+              <div class="menu-item"><span class="name">3 Bolas</span><span class="price">S/ 17.00</span></div>
+              <div class="menu-item"><span class="name">Adicional: barquillo, topping, habanito, fudge/manjar/caramel/nutella</span><span class="price">+S/ 1.00</span></div>
+            </div>
+            <div class="menu-group">
+              <h3>Cookies</h3>
+              <div class="menu-item"><span class="name">Red Velvet & Chips de Chocolate</span><span class="price">S/ 3.00</span></div>
+              <div class="menu-item"><span class="name">Full Choco</span><span class="price">S/ 3.00</span></div>
+              <div class="menu-item"><span class="name">Chocochip & Pecanas</span><span class="price">S/ 3.00</span></div>
+              <div class="menu-item"><span class="name">Nutella, Almendras y Chocolate</span><span class="price">S/ 7.00</span></div>
+              <div class="menu-item"><span class="name">Nutella & Chips de Chocolate</span><span class="price">S/ 7.00</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- JUGOS, LIMONADAS Y OTROS -->
+        <div class="menu-panel" id="panel-bebidas">
+          <div class="menu-groups">
+            <div class="menu-group">
+              <h3>Jugos</h3>
+              <div class="menu-item"><span class="name">Papaya</span><span class="price">S/ 8.00</span></div>
+              <div class="menu-item"><span class="name">Piña</span><span class="price">S/ 8.00</span></div>
+              <div class="menu-item"><span class="name">Fresa</span><span class="price">S/ 8.00</span></div>
+              <div class="menu-item"><span class="name">Fresa con leche</span><span class="price">S/ 10.00</span></div>
+              <div class="menu-item"><span class="name">Surtido</span><span class="price">S/ 9.00</span></div>
+              <div class="menu-item"><span class="name">Especial</span><span class="price">S/ 12.00</span></div>
+              <div class="menu-item"><span class="name">Naranja</span><span class="price">S/ 9.00</span></div>
+              <div class="menu-item"><span class="name">Papaya / Naranja / Piña</span><span class="price">S/ 9.00</span></div>
+              <div class="menu-item"><span class="name">Papaya / Arándanos / Fresa</span><span class="price">S/ 10.00</span></div>
+            </div>
+            <div class="menu-group">
+              <h3>Limonadas</h3>
+              <div class="menu-item"><span class="name">Limonada de Hierbaluisa</span><span class="price">S/ 8.00</span></div>
+              <div class="menu-item"><span class="name">Limonada Frozen</span><span class="price">S/ 8.00</span></div>
+              <div class="menu-item"><span class="name">Mango Frozen</span><span class="price">S/ 10.00</span></div>
+              <div class="menu-item"><span class="name">Strawberry Limonade</span><span class="price">S/ 10.00</span></div>
+              <div class="menu-item"><span class="name">Blueberry Limonade</span><span class="price">S/ 10.00</span></div>
+              <h3 style="margin-top:18px;">Otros</h3>
+              <div class="menu-item"><span class="name">Inka Cola</span><span class="price">S/ 3.50</span></div>
+              <div class="menu-item"><span class="name">Coca Cola</span><span class="price">S/ 3.50</span></div>
+              <div class="menu-item"><span class="name">Agua Mineral</span><span class="price">S/ 3.50</span></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= SEDES ================= -->
+    <section class="contact" id="sedes">
+      <div class="wrap">
+        <div class="contact-head">
+          <span class="eyebrow">Nuestras sedes</span>
+          <h2>Encuéntranos donde te quede más cerca</h2>
+        </div>
+
+        <div class="sedes-grid">
+          <div class="sede-card">
+            <span class="tag">Sede 1</span>
+            <h3>D&D Velasco Astete</h3>
+            <div class="contact-line">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span>Av. Velasco Astete 2686</span>
+            </div>
+            <div class="contact-line">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              <!-- PERSONALIZAR: horario real de esta sede -->
+              <span>Horario: consultar por WhatsApp</span>
+            </div>
+          </div>
+
+          <div class="sede-card">
+            <span class="tag">Sede 2</span>
+            <h3>D&D Javier Prado</h3>
+            <div class="contact-line">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span>Av. Javier Prado Oeste 808</span>
+            </div>
+            <div class="contact-line">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              <!-- PERSONALIZAR: horario real de esta sede -->
+              <span>Horario: consultar por WhatsApp</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="text-align:center; margin-top:32px;">
+          <a class="btn btn-whatsapp" href="https://wa.me/51920154926?text=Hola%2C%20quisiera%20más%20información" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5C10 9 9.4 7.6 9.1 7c-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.2.3-1 1-1 2.4s1 2.8 1.1 3c.1.2 2 3 4.8 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.2-.3-.2-.6-.3z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.6 1.4 5.1L2 22l5.1-1.3c1.4.8 3.1 1.2 4.9 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.6 0-3.2-.4-4.5-1.3l-.3-.2-3.3.9.9-3.2-.2-.3C3.7 14.7 3.3 13.4 3.3 12 3.3 7.2 7.2 3.3 12 3.3S20.7 7.2 20.7 12 16.8 20.2 12 20.2z"/></svg>
+            Escríbenos por WhatsApp
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    <span>© 2026 D&D Cafetería y Pastelería Artesanal.</span>
+    <span>La vida es corta, come el postre primero.</span>
+  </footer>
+
+  <a class="float-whatsapp" href="https://wa.me/51920154926?text=Hola%2C%20quisiera%20más%20información" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5C10 9 9.4 7.6 9.1 7c-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.2.3-1 1-1 2.4s1 2.8 1.1 3c.1.2 2 3 4.8 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.2-.3-.2-.6-.3z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.6 1.4 5.1L2 22l5.1-1.3c1.4.8 3.1 1.2 4.9 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.6 0-3.2-.4-4.5-1.3l-.3-.2-3.3.9.9-3.2-.2-.3C3.7 14.7 3.3 13.4 3.3 12 3.3 7.2 7.2 3.3 12 3.3S20.7 7.2 20.7 12 16.8 20.2 12 20.2z"/></svg>
+  </a>
+
+  <script>
+    (function () {
+      const tabs = document.querySelectorAll('.menu-tab');
+      const panels = document.querySelectorAll('.menu-panel');
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          tabs.forEach(t => t.classList.remove('active'));
+          panels.forEach(p => p.classList.remove('active'));
+          tab.classList.add('active');
+          document.getElementById('panel-' + tab.dataset.tab).classList.add('active');
+        });
+      });
+    })();
+  </script>
+
+</body>
+</html>
